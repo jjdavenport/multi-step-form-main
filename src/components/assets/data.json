@@ -1,0 +1,98 @@
+{
+  "sidebar": {
+    "step1": "Your info",
+    "step2": "Select plan",
+    "step3": "Add-ons",
+    "step4": "Summary"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "title": "Personal info",
+      "description": "Please provide your name, email address, and phone number.",
+      "inputs": [
+        {
+          "label": "Name",
+          "placeholder": "e.g. Stephen King",
+          "type": "text"
+        },
+        {
+          "label": "Email address",
+          "placeholder": "e.g. stephenking@lorem.com",
+          "type": "email"
+        },
+        {
+          "label": "Phone number",
+          "placeholder": "e.g. +1 234 567 890",
+          "type": "number"
+        }
+      ],
+      "buttons": ["Next Step"]
+    },
+    {
+      "step": 2,
+      "title": "Select your plan",
+      "description": "You have the option of monthly or yearly billing.",
+      "extra": "2 months free",
+      "plans": [
+        {
+          "img": "./images/icon-arcade.svg",
+          "name": "Arcade",
+          "priceM": "$9/mo",
+          "priceY": "$90/yr"
+        },
+        {
+          "img": "./images/icon-advanced.svg",
+          "name": "Advanced",
+          "priceM": "$12/mo",
+          "priceY": "$120/yr"
+        },
+        {
+          "img": "./images/icon-pro.svg",
+          "name": "Pro",
+          "priceM": "$15/mo",
+          "priceY": "$150/yr"
+        }
+      ],
+      "billing_options": ["Monthly", "Yearly"],
+      "buttons": ["Go Back", "Next Step"]
+    },
+    {
+      "step": 3,
+      "title": "Pick add-ons",
+      "description": "Add-ons help enhance your gaming experience.",
+      "checked": "./images/icon-checkmark.svg",
+      "add_ons": [
+        {
+          "name": "Online service",
+          "description": "Access to multiplayer games",
+          "price": "+$1/mo"
+        },
+        {
+          "name": "Larger storage",
+          "description": "Extra 1TB of cloud save",
+          "price": "+$2/mo"
+        },
+        {
+          "name": "Customizable Profile",
+          "description": "Custom theme on your profile",
+          "price": "+$2/mo"
+        }
+      ],
+      "buttons": ["Go Back", "Next Step"]
+    },
+    {
+      "step": 4,
+      "change": "change",
+      "title": "Finishing up",
+      "description": "Double-check everything looks OK before confirming.",
+      "total": "Total (per month/year)",
+      "buttons": ["Go Back", "Confirm"]
+    },
+    {
+      "step": 5,
+      "title": "Thank you!",
+      "message": "Thanks for confirming your subscription! We hope you have fun using our platform. If you ever need support, please feel free to email us at support@loremgaming.com."
+    }
+  ]
+}
