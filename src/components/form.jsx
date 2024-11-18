@@ -14,7 +14,7 @@ const Form = ({ data, page, setTerm, setPlan }) => {
       <form
         onSubmit={handleSubmit}
         noValidate
-        className="flex flex-col rounded-lg bg-white px-6 py-8"
+        className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:px-0 md:py-0"
       >
         {page === 1 ? (
           <StepOne data={data.steps[0]} inputs={data.steps[0].inputs} />
