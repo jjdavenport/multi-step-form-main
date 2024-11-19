@@ -8,12 +8,24 @@ import { useMediaQuery } from "react-responsive";
 function App() {
   const [page, setPage] = useState(1);
   const [plan, setPlan] = useState(null);
-  const [term, setTerm] = useState("monthly");
+  const [yearly, setYearly] = useState(false);
   const [valid, setValid] = useState(false);
   const desktop = useMediaQuery({ minWidth: 768 });
 
   const handlePage = (num) => {
     setPage(num);
+  };
+
+  const toggle = () => {
+    setYearly(!yearly);
+  };
+
+  const nextPage = () => {
+    setPage((prev) => prev + 1);
+  };
+
+  const prevPage = () => {
+    setPage((prev) => prev - 1);
   };
 
   return (
@@ -28,10 +40,16 @@ function App() {
             sidebar={data.sidebar}
           />
           <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
-            <Form setPlan={setPlan} setTerm={setTerm} page={page} data={data} />
-            {desktop && (
+            <Form
+              setPlan={setPlan}
+              setYearly={setYearly}
+              page={page}
+              data={data}
+            />
+            {desktop && page < 5 && (
               <Buttons
-                onClick={handlePage}
+                prevPage={prevPage}
+                nextPage={nextPage}
                 data={
                   page === 1
                     ? data.steps[0]
@@ -39,17 +57,16 @@ function App() {
                       ? data.steps[1]
                       : page === 3
                         ? data.steps[2]
-                        : page === 4
-                          ? data.steps[3]
-                          : page === 5 && data.steps[4]
+                        : data.steps[3]
                 }
               />
             )}
           </section>
         </main>
-        {!desktop && (
+        {!desktop && page < 5 && (
           <Buttons
-            onClick={handlePage}
+            prevPage={prevPage}
+            nextPage={nextPage}
             data={
               page === 1
                 ? data.steps[0]
@@ -57,9 +74,7 @@ function App() {
                   ? data.steps[1]
                   : page === 3
                     ? data.steps[2]
-                    : page === 4
-                      ? data.steps[3]
-                      : page === 5 && data.steps[4]
+                    : data.steps[3]
             }
           />
         )}

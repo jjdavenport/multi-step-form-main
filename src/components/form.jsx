@@ -4,7 +4,7 @@ import StepThree from "./step-three";
 import StepFour from "./step-four";
 import StepFive from "./step-five";
 
-const Form = ({ data, page, setTerm, setPlan }) => {
+const Form = ({ data, page, setYearly, setPlan }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
@@ -19,11 +19,7 @@ const Form = ({ data, page, setTerm, setPlan }) => {
         {page === 1 ? (
           <StepOne data={data.steps[0]} inputs={data.steps[0].inputs} />
         ) : page === 2 ? (
-          <StepTwo
-            setTerm={setTerm}
-            data={data.steps[1]}
-            plans={data.steps[1].plans}
-          />
+          <StepTwo data={data.steps[1]} plans={data.steps[1].plans} />
         ) : page === 3 ? (
           <StepThree
             setPlan={setPlan}
@@ -33,7 +29,7 @@ const Form = ({ data, page, setTerm, setPlan }) => {
         ) : page === 4 ? (
           <StepFour data={data.steps[3]} />
         ) : (
-          <StepFive />
+          <StepFive data={data.steps[4]} />
         )}
       </form>
     </>
