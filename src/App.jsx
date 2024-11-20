@@ -11,17 +11,17 @@ function App() {
   const [plan, setPlan] = useState({
     plan: null,
     price: null,
+    addOns: null,
   });
   const [yearly, setYearly] = useState(false);
-  const [valid, setValid] = useState(false);
+  const [valid, setValid] = useState({
+    form: false,
+    plan: false,
+  });
   const desktop = useMediaQuery({ minWidth: 768 });
 
   const changePlan = () => {
     setPage(2);
-  };
-
-  const handlePage = (num) => {
-    setPage(num);
   };
 
   const toggle = () => {
@@ -29,7 +29,10 @@ function App() {
   };
 
   const nextPage = () => {
-    setPage((prev) => prev + 1);
+    (page === 1 && setPage((prev) => prev + 1)) ||
+      (page === 2 && valid.plan && setPage((prev) => prev + 1)) ||
+      (page === 3 && setPage((prev) => prev + 1)) ||
+      (page === 4 && setPage((prev) => prev + 1));
   };
 
   const prevPage = () => {
@@ -42,14 +45,16 @@ function App() {
         <div className="flex flex-1 flex-col justify-between md:w-full md:items-center md:justify-center">
           <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
             <Progress
+              valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
               desktop={desktop}
-              onClick={handlePage}
               page={page}
               steps={data.steps}
               sidebar={data.sidebar}
             />
             <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
               <Form
+                valid={valid}
+                setValid={setValid}
                 plan={plan}
                 setPlan={setPlan}
                 yearly={yearly}
@@ -60,6 +65,9 @@ function App() {
               />
               {desktop && page < 5 && (
                 <Buttons
+                  valid={
+                    page === 1 ? valid.form : page === 2 ? valid.plan : valid
+                  }
                   prevPage={prevPage}
                   nextPage={nextPage}
                   data={
@@ -77,6 +85,7 @@ function App() {
           </main>
           {!desktop && page < 5 && (
             <Buttons
+              valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
               prevPage={prevPage}
               nextPage={nextPage}
               data={

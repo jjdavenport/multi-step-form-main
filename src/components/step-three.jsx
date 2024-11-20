@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const StepThree = ({ data, addOns, yearly }) => {
+const StepThree = ({ data, addOns, yearly, plan }) => {
   const [active, setActive] = useState([]);
   const toggle = (index) => {
     setActive((prev) =>

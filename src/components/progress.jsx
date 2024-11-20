@@ -6,12 +6,12 @@ const Progress = ({ steps, onClick, page, desktop, sidebar }) => {
       <ul className="flex ~sm/md:~gap-4/6 md:h-full md:flex-col">
         {steps.slice(0, 4).map((i, index) => (
           <li key={index} className="flex gap-4 md:items-center">
-            <button
-              className={`${page === i.step || (page === 5 && i.step === 4) ? "border-lightBlue bg-lightBlue text-marineBlue" : "border-pastelBlue text-white"} rounded-full border font-bold transition-colors duration-300 ease-in-out hover:border-lightBlue hover:bg-lightBlue hover:text-marineBlue ~sm/md:~h-8/9 ~sm/md:~w-8/9`}
+            <div
+              className={`${page === i.step || (page === 5 && i.step === 4) ? "border-lightBlue bg-lightBlue text-marineBlue" : "border-pastelBlue text-white"} flex items-center justify-center rounded-full border font-bold transition-colors duration-300 ease-in-out ~sm/md:~h-8/9 ~sm/md:~w-8/9`}
               onClick={() => onClick(i.step)}
             >
               {i.step}
-            </button>
+            </div>
             {desktop && (
               <div className="flex flex-col uppercase">
                 <span className="text-sm text-pastelBlue">Step {i.step}</span>

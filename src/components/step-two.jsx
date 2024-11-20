@@ -1,10 +1,11 @@
 import { useState } from "react";
 
-const StepTwo = ({ data, plans, yearly, setPlan, onClick }) => {
+const StepTwo = ({ data, plans, yearly, setPlan, onClick, setValid }) => {
   const [active, setActive] = useState(null);
   const toggleItems = (i) => {
     setActive(i);
-    setPlan({ price: i.name });
+    setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
+    setValid({ plan: true });
   };
   return (
     <>

@@ -3,14 +3,14 @@ import Input from "./input";
 const StepOne = ({ data, inputs }) => {
   return (
     <>
-      <div className="~sm/md:~gap-4/8 flex flex-col md:py-4">
+      <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">
         <div className="flex flex-col gap-2">
-          <span className="~sm/md:~text-2xl/4xl font-bold text-marineBlue">
+          <span className="font-bold text-marineBlue ~sm/md:~text-2xl/4xl">
             {data.title}
           </span>
           <p className="text-coolGray">{data.description}</p>
         </div>
-        <ul className="~sm/md:~gap-4/6 flex flex-col">
+        <ul className="flex flex-col ~sm/md:~gap-4/6">
           {inputs.map((i, index) => (
             <li key={index}>
               <label

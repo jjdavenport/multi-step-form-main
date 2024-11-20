@@ -26,7 +26,7 @@ const Input = ({ type, placeholder, label }) => {
         {error && <span className="font-bold text-strawberryRed">{error}</span>}
       </div>
       <input
-        className={`${error ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} ~sm/md:~p-2/3 cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out placeholder:font-medium placeholder:text-coolGray`}
+        className={`${error ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out placeholder:font-medium placeholder:text-coolGray ~sm/md:~p-2/3`}
         value={input}
         type={type}
         placeholder={placeholder}
