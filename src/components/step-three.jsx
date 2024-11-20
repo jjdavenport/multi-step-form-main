@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const StepThree = ({ data, addOns }) => {
+const StepThree = ({ data, addOns, yearly }) => {
   const [active, setActive] = useState([]);
   const toggle = (index) => {
     setActive((prev) =>
@@ -9,9 +9,9 @@ const StepThree = ({ data, addOns }) => {
   };
   return (
     <>
-      <div className="~sm/md:~gap-4/8 flex flex-col md:py-4">
+      <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">
         <div className="flex flex-col gap-2">
-          <span className="~sm/md:~text-2xl/3xl font-bold text-marineBlue">
+          <span className="font-bold text-marineBlue ~sm/md:~text-2xl/3xl">
             {data.title}
           </span>
           <p className="font-medium text-coolGray">{data.description}</p>
@@ -21,7 +21,7 @@ const StepThree = ({ data, addOns }) => {
             <li key={index}>
               <button
                 onClick={() => toggle(index)}
-                className={`${active.includes(index) ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-coolGray"} ~sm/md:~p-2/4 flex w-full items-center justify-between rounded-md outline outline-1 transition-colors duration-300 ease-in-out`}
+                className={`${active.includes(index) ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} flex w-full items-center justify-between rounded-md outline outline-1 transition-colors duration-300 ease-in-out ~sm/md:~p-2/4`}
               >
                 <div className="flex items-center gap-3">
                   <div
@@ -42,7 +42,7 @@ const StepThree = ({ data, addOns }) => {
                   </div>
                 </div>
                 <span className="text-sm font-medium text-purplishBlue">
-                  {i.price}
+                  {yearly ? i.priceY : i.priceM}
                 </span>
               </button>
             </li>

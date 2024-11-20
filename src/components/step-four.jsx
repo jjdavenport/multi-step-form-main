@@ -1,4 +1,4 @@
-const StepFour = ({ data }) => {
+const StepFour = ({ data, onClick, yearly, plan }) => {
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -8,9 +8,19 @@ const StepFour = ({ data }) => {
           </span>
           <p className="font-medium text-coolGray">{data.description}</p>
         </div>
-        <div className="bg-alabaster p-3">
-          <span></span>
-          <button className="text-coolGray underline">{data.change}</button>
+        <div className="flex justify-between bg-alabaster p-3">
+          <div className="flex flex-col">
+            <span>
+              {plan.price}({yearly ? "Yearly" : "Monthly"})
+            </span>
+            <button
+              onClick={onClick}
+              className="text-coolGray underline first-letter:uppercase"
+            >
+              {data.change}
+            </button>
+          </div>
+          <div></div>
         </div>
         <div className="flex justify-between">
           <span>{data.total}</span>

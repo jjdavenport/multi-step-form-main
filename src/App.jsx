@@ -4,13 +4,21 @@ import Form from "./components/form.jsx";
 import Progress from "./components/progress.jsx";
 import Buttons from "./components/buttons.jsx";
 import { useMediaQuery } from "react-responsive";
+import Footer from "./components/footer.jsx";
 
 function App() {
   const [page, setPage] = useState(1);
-  const [plan, setPlan] = useState(null);
+  const [plan, setPlan] = useState({
+    plan: null,
+    price: null,
+  });
   const [yearly, setYearly] = useState(false);
   const [valid, setValid] = useState(false);
   const desktop = useMediaQuery({ minWidth: 768 });
+
+  const changePlan = () => {
+    setPage(2);
+  };
 
   const handlePage = (num) => {
     setPage(num);
@@ -30,54 +38,60 @@ function App() {
 
   return (
     <>
-      <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base md:items-center md:justify-center">
-        <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
-          <Progress
-            desktop={desktop}
-            onClick={handlePage}
-            page={page}
-            steps={data.steps}
-            sidebar={data.sidebar}
-          />
-          <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
-            <Form
-              setPlan={setPlan}
-              setYearly={setYearly}
+      <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base">
+        <div className="flex flex-1 flex-col justify-between md:w-full md:items-center md:justify-center">
+          <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
+            <Progress
+              desktop={desktop}
+              onClick={handlePage}
               page={page}
-              data={data}
+              steps={data.steps}
+              sidebar={data.sidebar}
             />
-            {desktop && page < 5 && (
-              <Buttons
-                prevPage={prevPage}
-                nextPage={nextPage}
-                data={
-                  page === 1
-                    ? data.steps[0]
-                    : page === 2
-                      ? data.steps[1]
-                      : page === 3
-                        ? data.steps[2]
-                        : data.steps[3]
-                }
+            <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
+              <Form
+                plan={plan}
+                setPlan={setPlan}
+                yearly={yearly}
+                toggle={toggle}
+                page={page}
+                data={data}
+                changePlan={changePlan}
               />
-            )}
-          </section>
-        </main>
-        {!desktop && page < 5 && (
-          <Buttons
-            prevPage={prevPage}
-            nextPage={nextPage}
-            data={
-              page === 1
-                ? data.steps[0]
-                : page === 2
-                  ? data.steps[1]
-                  : page === 3
-                    ? data.steps[2]
-                    : data.steps[3]
-            }
-          />
-        )}
+              {desktop && page < 5 && (
+                <Buttons
+                  prevPage={prevPage}
+                  nextPage={nextPage}
+                  data={
+                    page === 1
+                      ? data.steps[0]
+                      : page === 2
+                        ? data.steps[1]
+                        : page === 3
+                          ? data.steps[2]
+                          : data.steps[3]
+                  }
+                />
+              )}
+            </section>
+          </main>
+          {!desktop && page < 5 && (
+            <Buttons
+              prevPage={prevPage}
+              nextPage={nextPage}
+              data={
+                page === 1
+                  ? data.steps[0]
+                  : page === 2
+                    ? data.steps[1]
+                    : page === 3
+                      ? data.steps[2]
+                      : data.steps[3]
+              }
+            />
+          )}
+        </div>
+        {desktop && <Footer />}
       </div>
     </>
   );
