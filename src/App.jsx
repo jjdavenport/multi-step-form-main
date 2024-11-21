@@ -29,10 +29,6 @@ function App() {
     setPage(2);
   };
 
-  const toggle = () => {
-    setYearly(!yearly);
-  };
-
   const nextPage = () => {
     (page === 1 && setPage((prev) => prev + 1)) ||
       (page === 2 && valid.plan && setPage((prev) => prev + 1)) ||
@@ -70,7 +66,7 @@ function App() {
                 plan={plan}
                 setPlan={setPlan}
                 yearly={yearly}
-                toggle={toggle}
+                setYearly={setYearly}
                 page={page}
                 data={data}
                 changePlan={changePlan}
@@ -80,6 +76,7 @@ function App() {
                   valid={
                     page === 1 ? valid.form : page === 2 ? valid.plan : valid
                   }
+                  error={page === 2 && error}
                   checkValid={page === 2 && checkValid}
                   prevPage={prevPage}
                   nextPage={nextPage}
@@ -98,6 +95,7 @@ function App() {
           </main>
           {!desktop && page < 5 && (
             <Buttons
+              error={page === 2 && error}
               valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
               prevPage={prevPage}
               nextPage={nextPage}

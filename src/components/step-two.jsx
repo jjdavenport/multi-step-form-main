@@ -1,21 +1,31 @@
-import { useState } from "react";
-
 const StepTwo = ({
   data,
   plans,
   yearly,
   setPlan,
-  onClick,
   setValid,
   error,
   setError,
+  active,
+  setActive,
+  setYearly,
 }) => {
-  const [active, setActive] = useState(null);
-  const toggleItems = (i) => {
+  const togglePlans = (i) => {
     setActive(i);
     setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
     setValid({ plan: true });
     setError(false);
+  };
+  const toggleYearly = () => {
+    setYearly((prev) => {
+      const changeYearly = !prev;
+      active &&
+        setPlan({
+          plan: active.name,
+          price: changeYearly ? active.priceY : active.priceM,
+        });
+      return changeYearly;
+    });
   };
   return (
     <>
@@ -30,7 +40,7 @@ const StepTwo = ({
           {plans.map((i, index) => (
             <li key={index}>
               <button
-                onClick={() => toggleItems(i)}
+                onClick={() => togglePlans(i)}
                 className={`${active === i && "bg-purplishBlue bg-opacity-5 outline-purplishBlue"} ${error && "outline-strawberryRed"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 outline-gray-500 transition-colors duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
               >
                 <img src={i.img} />
@@ -55,7 +65,7 @@ const StepTwo = ({
           </span>
           <div className="flex items-center">
             <button
-              onClick={onClick}
+              onClick={toggleYearly}
               className="relative flex h-6 w-12 items-center rounded-full bg-marineBlue transition-colors duration-300"
             >
               <span
