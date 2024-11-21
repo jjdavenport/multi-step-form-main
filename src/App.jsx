@@ -8,6 +8,7 @@ import Footer from "./components/footer.jsx";
 
 function App() {
   const [page, setPage] = useState(1);
+  const [error, setError] = useState(null);
   const [plan, setPlan] = useState({
     plan: null,
     price: null,
@@ -19,6 +20,10 @@ function App() {
     plan: false,
   });
   const desktop = useMediaQuery({ minWidth: 768 });
+
+  const checkValid = () => {
+    setError(true);
+  };
 
   const changePlan = () => {
     setPage(2);
@@ -39,6 +44,10 @@ function App() {
     setPage((prev) => prev - 1);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base">
@@ -53,6 +62,9 @@ function App() {
             />
             <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
               <Form
+                setError={setError}
+                error={error}
+                onSubmit={handleSubmit}
                 valid={valid}
                 setValid={setValid}
                 plan={plan}
@@ -68,6 +80,7 @@ function App() {
                   valid={
                     page === 1 ? valid.form : page === 2 ? valid.plan : valid
                   }
+                  checkValid={page === 2 && checkValid}
                   prevPage={prevPage}
                   nextPage={nextPage}
                   data={
@@ -88,6 +101,7 @@ function App() {
               valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
               prevPage={prevPage}
               nextPage={nextPage}
+              checkValid={page === 2 && checkValid}
               data={
                 page === 1
                   ? data.steps[0]

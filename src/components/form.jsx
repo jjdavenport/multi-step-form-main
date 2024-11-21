@@ -14,15 +14,14 @@ const Form = ({
   plan,
   setValid,
   valid,
+  onSubmit,
+  error,
+  setError,
 }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   return (
     <>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         noValidate
         className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:px-0 md:py-0"
       >
@@ -30,6 +29,8 @@ const Form = ({
           <StepOne data={data.steps[0]} inputs={data.steps[0].inputs} />
         ) : page === 2 ? (
           <StepTwo
+            setError={setError}
+            error={error}
             valid={valid}
             setValid={setValid}
             setPlan={setPlan}

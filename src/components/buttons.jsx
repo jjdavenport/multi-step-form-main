@@ -1,4 +1,4 @@
-const Buttons = ({ data, prevPage, nextPage, valid }) => {
+const Buttons = ({ data, prevPage, nextPage, valid, checkValid }) => {
   return (
     <>
       <div
@@ -17,7 +17,7 @@ const Buttons = ({ data, prevPage, nextPage, valid }) => {
               {data.buttons[0]}
             </button>
             <button
-              onClick={nextPage}
+              onClick={valid ? nextPage : checkValid}
               className={`${valid ? "" : "cursor-not-allowed"} rounded-md bg-marineBlue px-5 py-3 font-medium text-alabaster`}
             >
               {data.buttons[1]}

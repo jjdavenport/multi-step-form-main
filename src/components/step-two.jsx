@@ -1,11 +1,21 @@
 import { useState } from "react";
 
-const StepTwo = ({ data, plans, yearly, setPlan, onClick, setValid }) => {
+const StepTwo = ({
+  data,
+  plans,
+  yearly,
+  setPlan,
+  onClick,
+  setValid,
+  error,
+  setError,
+}) => {
   const [active, setActive] = useState(null);
   const toggleItems = (i) => {
     setActive(i);
     setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
     setValid({ plan: true });
+    setError(false);
   };
   return (
     <>
@@ -21,7 +31,7 @@ const StepTwo = ({ data, plans, yearly, setPlan, onClick, setValid }) => {
             <li key={index}>
               <button
                 onClick={() => toggleItems(i)}
-                className={`${active === i && "bg-purplishBlue bg-opacity-5 outline-purplishBlue"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 outline-gray-500 transition-colors duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
+                className={`${active === i && "bg-purplishBlue bg-opacity-5 outline-purplishBlue"} ${error && "outline-strawberryRed"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 outline-gray-500 transition-colors duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
               >
                 <img src={i.img} />
                 <div className="flex flex-col">

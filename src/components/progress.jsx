@@ -1,4 +1,4 @@
-const Progress = ({ steps, onClick, page, desktop, sidebar }) => {
+const Progress = ({ steps, page, desktop, sidebar }) => {
   return (
     <aside
       className={`${!desktop && "h-40"} flex flex-col items-center bg-mobile bg-cover bg-no-repeat pt-8 ~sm/md:~p-6/8 md:w-5/12 md:items-start md:rounded-lg md:bg-desktop md:bg-bottom`}
@@ -8,7 +8,6 @@ const Progress = ({ steps, onClick, page, desktop, sidebar }) => {
           <li key={index} className="flex gap-4 md:items-center">
             <div
               className={`${page === i.step || (page === 5 && i.step === 4) ? "border-lightBlue bg-lightBlue text-marineBlue" : "border-pastelBlue text-white"} flex items-center justify-center rounded-full border font-bold transition-colors duration-300 ease-in-out ~sm/md:~h-8/9 ~sm/md:~w-8/9`}
-              onClick={() => onClick(i.step)}
             >
               {i.step}
             </div>
