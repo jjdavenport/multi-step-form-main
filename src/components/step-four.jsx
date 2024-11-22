@@ -1,33 +1,64 @@
-const StepFour = ({ data, onClick, yearly, plan }) => {
+const StepFour = ({ data, onClick, yearly, plan, addOns }) => {
+  const total = () => {
+    const planPrice = parseInt(plan.price.replace(/[^0-9]/g, ""));
+    const addOnsPrice = addOns.reduce(
+      (acc, item) =>
+        acc +
+        parseInt(
+          yearly
+            ? item.priceY.replace(/[^0-9]/g, "")
+            : item.priceM.replace(/[^0-9]/g, ""),
+          10,
+        ),
+      0,
+    );
+    return planPrice + addOnsPrice;
+  };
   return (
     <>
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col">
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
           <span className="text-2xl font-bold text-marineBlue">
             {data.title}
           </span>
           <p className="font-medium text-coolGray">{data.description}</p>
         </div>
-        <div className="flex divide-y bg-alabaster p-3">
+        <div
+          className={`flex flex-col ${addOns.length >= 1 && "gap-4 divide-y"} rounded-lg bg-alabaster p-4`}
+        >
           <div className="flex w-full justify-between">
             <div className="flex flex-col items-start">
-              <span>
+              <span className="font-bold text-marineBlue">
                 {plan.plan} ({yearly ? "Yearly" : "Monthly"})
               </span>
               <button
                 onClick={onClick}
-                className="text-coolGray underline first-letter:uppercase"
+                className="font-medium text-coolGray underline first-letter:uppercase"
               >
                 {data.change}
               </button>
             </div>
-            <div>{plan.price}</div>
+            <div className="font-bold text-marineBlue">{plan.price}</div>
           </div>
-          <div>{}</div>
+          <ul className={`flex flex-col gap-4 ${addOns.length >= 1 && "pt-4"}`}>
+            {addOns.length >= 1 &&
+              addOns.map((i, index) => (
+                <li className="flex justify-between" key={index}>
+                  <span className="font-medium text-coolGray">{i.name}</span>
+                  <span className="font-medium text-marineBlue">
+                    {yearly ? i.priceY : i.priceM}
+                  </span>
+                </li>
+              ))}
+          </ul>
         </div>
-        <div className="flex justify-between">
-          <span>{data.total}</span>
-          <span></span>
+        <div className="flex items-center justify-between px-4">
+          <span className="font-medium text-coolGray">
+            {yearly ? data.totalY : data.totalM}
+          </span>
+          <span className="font-bold text-purplishBlue ~sm/md:~text-lg/xl">
+            +${total()}/{yearly ? "yr" : "mo"}
+          </span>
         </div>
       </div>
     </>

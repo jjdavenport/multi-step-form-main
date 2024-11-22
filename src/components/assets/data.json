@@ -89,7 +89,8 @@
       "change": "change",
       "title": "Finishing up",
       "description": "Double-check everything looks OK before confirming.",
-      "total": "Total (per month/year)",
+      "totalM": "Total (per month)",
+      "totalY": "Total (per year)",
       "buttons": ["Go Back", "Confirm"]
     },
     {

@@ -44,13 +44,27 @@ function App() {
     e.preventDefault();
   };
 
+  const dataProp = () => {
+    return page === 1
+      ? data.steps[0]
+      : page === 2
+        ? data.steps[1]
+        : page === 3
+          ? data.steps[2]
+          : data.steps[3];
+  };
+
+  const validProp = () => {
+    return page === 1 ? valid.form : page === 2 ? valid.plan : valid;
+  };
+
   return (
     <>
       <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base">
         <div className="flex flex-1 flex-col justify-between md:w-full md:items-center md:justify-center">
           <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
             <Progress
-              valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
+              valid={validProp()}
               desktop={desktop}
               page={page}
               steps={data.steps}
@@ -73,22 +87,12 @@ function App() {
               />
               {desktop && page < 5 && (
                 <Buttons
-                  valid={
-                    page === 1 ? valid.form : page === 2 ? valid.plan : valid
-                  }
+                  valid={validProp()}
                   error={page === 2 && error}
                   checkValid={page === 2 && checkValid}
                   prevPage={prevPage}
                   nextPage={nextPage}
-                  data={
-                    page === 1
-                      ? data.steps[0]
-                      : page === 2
-                        ? data.steps[1]
-                        : page === 3
-                          ? data.steps[2]
-                          : data.steps[3]
-                  }
+                  data={dataProp()}
                 />
               )}
             </section>
@@ -96,19 +100,11 @@ function App() {
           {!desktop && page < 5 && (
             <Buttons
               error={page === 2 && error}
-              valid={page === 1 ? valid.form : page === 2 ? valid.plan : valid}
+              valid={validProp()}
               prevPage={prevPage}
               nextPage={nextPage}
               checkValid={page === 2 && checkValid}
-              data={
-                page === 1
-                  ? data.steps[0]
-                  : page === 2
-                    ? data.steps[1]
-                    : page === 3
-                      ? data.steps[2]
-                      : data.steps[3]
-              }
+              data={dataProp()}
             />
           )}
         </div>
