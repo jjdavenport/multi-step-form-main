@@ -1,38 +1,36 @@
-import { useState } from "react";
-
-const Input = ({ type, placeholder, label }) => {
-  const [error, setError] = useState("");
-  const [input, setInput] = useState("");
-
-  const validate = () => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (input === "") {
-      setError("This field is required");
-    } else if (type === "email" && !input.match(regex)) {
-      setError("Must be a valid email address");
-    } else {
-      setError("");
-    }
-  };
-
-  const blur = () => {
-    validate();
-  };
-
+const Input = ({
+  type,
+  placeholder,
+  label,
+  onChange,
+  onBlur,
+  onError,
+  value,
+  htmlFor,
+}) => {
   return (
     <>
-      <div className="flex justify-between">
-        <span>{label}</span>
-        {error && <span className="font-bold text-strawberryRed">{error}</span>}
-      </div>
-      <input
-        className={`${error ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out placeholder:font-medium placeholder:text-coolGray ~sm/md:~p-2/3`}
-        value={input}
-        type={type}
-        placeholder={placeholder}
-        onBlur={blur}
-        onChange={(e) => setInput(e.target.value)}
-      />
+      <li>
+        <label
+          htmlFor={htmlFor}
+          className="flex flex-col gap-1 text-sm font-medium text-marineBlue"
+        >
+          <div className="flex justify-between">
+            <span>{label}</span>
+            {onError && (
+              <span className="font-bold text-strawberryRed">{onError}</span>
+            )}
+          </div>
+          <input
+            className={`${onError ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out placeholder:font-medium placeholder:text-coolGray ~sm/md:~p-2/3`}
+            value={value}
+            type={type}
+            placeholder={placeholder}
+            onBlur={onBlur}
+            onChange={onChange}
+          />
+        </label>
+      </li>
     </>
   );
 };

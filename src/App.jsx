@@ -30,7 +30,7 @@ function App() {
   };
 
   const nextPage = () => {
-    (page === 1 && setPage((prev) => prev + 1)) ||
+    (page === 1 && valid.plan && setPage((prev) => prev + 1)) ||
       (page === 2 && valid.plan && setPage((prev) => prev + 1)) ||
       (page === 3 && setPage((prev) => prev + 1)) ||
       (page === 4 && setPage((prev) => prev + 1));
@@ -38,10 +38,6 @@ function App() {
 
   const prevPage = () => {
     setPage((prev) => prev - 1);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
   };
 
   const dataProp = () => {
@@ -74,7 +70,6 @@ function App() {
               <Form
                 setError={setError}
                 error={error}
-                onSubmit={handleSubmit}
                 valid={valid}
                 setValid={setValid}
                 plan={plan}

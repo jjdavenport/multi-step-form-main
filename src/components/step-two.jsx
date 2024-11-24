@@ -41,7 +41,7 @@ const StepTwo = ({
             <li key={index}>
               <button
                 onClick={() => togglePlans(i)}
-                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} ${error && "bg-strawberryRed bg-opacity-5 outline-strawberryRed"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-colors duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
+                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} ${error ? "bg-strawberryRed bg-opacity-5 outline-strawberryRed" : "hover:outline-purplishBlue"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-all duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
               >
                 <img src={i.img} />
                 <div className="flex flex-col">
@@ -70,7 +70,7 @@ const StepTwo = ({
             >
               <span
                 className={`h-4 w-4 rounded-full bg-white transition-transform duration-300 ${
-                  yearly ? "translate-x-6" : "translate-x-1"
+                  yearly ? "translate-x-7" : "translate-x-1"
                 }`}
               ></span>
             </button>

@@ -34,7 +34,7 @@ const StepThree = ({ data, addOns, yearly, active, setActive }) => {
                   isActive
                     ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue"
                     : "outline-lightGray"
-                } flex w-full items-center justify-between rounded-md outline outline-1 transition-colors duration-300 ease-in-out ~sm/md:~p-2/4`}
+                } flex w-full items-center justify-between rounded-md outline outline-1 transition-all duration-300 ease-in-out hover:outline-purplishBlue ~sm/md:~p-2/4`}
               >
                 <div className="flex items-center gap-3">
                   <div

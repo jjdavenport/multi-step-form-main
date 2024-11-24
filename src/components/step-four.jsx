@@ -33,7 +33,7 @@ const StepFour = ({ data, onClick, yearly, plan, addOns }) => {
               </span>
               <button
                 onClick={onClick}
-                className="font-medium text-coolGray underline first-letter:uppercase"
+                className="font-medium text-coolGray underline transition-colors duration-300 ease-in-out first-letter:uppercase hover:text-purplishBlue"
               >
                 {data.change}
               </button>

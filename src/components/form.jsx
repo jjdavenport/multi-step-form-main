@@ -19,7 +19,7 @@ const Form = ({
   setError,
   setYearly,
 }) => {
-  const [active, setActive] = useState(null);
+  const [activePlan, setActivePlan] = useState(null);
   const [activeAddOns, setActiveAddOns] = useState([]);
   return (
     <>
@@ -34,8 +34,8 @@ const Form = ({
           <StepTwo
             setYearly={setYearly}
             plan={plan}
-            active={active}
-            setActive={setActive}
+            active={activePlan}
+            setActive={setActivePlan}
             setError={setError}
             error={error}
             valid={valid}
