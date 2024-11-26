@@ -1,8 +1,8 @@
-import StepOne from "./step-one";
-import StepTwo from "./step-two";
-import StepThree from "./step-three";
-import StepFour from "./step-four";
-import StepFive from "./step-five";
+import StepOne from "../pages/step-one";
+import StepTwo from "../pages/step-two";
+import StepThree from "../pages/step-three";
+import StepFour from "../pages/step-four";
+import StepFive from "../pages/step-five";
 import { useState } from "react";
 
 const Form = ({
@@ -12,24 +12,35 @@ const Form = ({
   setPlan,
   changePlan,
   plan,
-  setValid,
-  valid,
-  onSubmit,
   error,
   setError,
   setYearly,
 }) => {
-  const [activePlan, setActivePlan] = useState(null);
+  const [activePlan, setActivePlan] = useState(data.steps[1].plans[0]);
   const [activeAddOns, setActiveAddOns] = useState([]);
+  const [nameInput, setNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
   return (
     <>
       <form
-        onSubmit={onSubmit}
+        onSubmit={(e) => e.preventDefault()}
         noValidate
         className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:flex-1 md:px-0 md:py-0"
       >
         {page === 1 ? (
-          <StepOne data={data.steps[0]} inputs={data.steps[0].inputs} />
+          <StepOne
+            nameInput={nameInput}
+            emailInput={emailInput}
+            phoneInput={phoneInput}
+            setNameInput={setNameInput}
+            setEmailInput={setEmailInput}
+            setPhoneInput={setPhoneInput}
+            setFormError={setError}
+            data={data.steps[0]}
+            inputs={data.steps[0].inputs}
+            error={error}
+          />
         ) : page === 2 ? (
           <StepTwo
             setYearly={setYearly}
@@ -38,8 +49,6 @@ const Form = ({
             setActive={setActivePlan}
             setError={setError}
             error={error}
-            valid={valid}
-            setValid={setValid}
             setPlan={setPlan}
             yearly={yearly}
             data={data.steps[1]}
@@ -49,7 +58,6 @@ const Form = ({
           <StepThree
             active={activeAddOns}
             setActive={setActiveAddOns}
-            setValid={setValid}
             yearly={yearly}
             setPlan={setPlan}
             data={data.steps[2]}

@@ -3,9 +3,6 @@ const StepTwo = ({
   plans,
   yearly,
   setPlan,
-  setValid,
-  error,
-  setError,
   active,
   setActive,
   setYearly,
@@ -13,8 +10,6 @@ const StepTwo = ({
   const togglePlans = (i) => {
     setActive(i);
     setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
-    setValid({ plan: true });
-    setError(false);
   };
   const toggleYearly = () => {
     setYearly((prev) => {
@@ -41,7 +36,7 @@ const StepTwo = ({
             <li key={index}>
               <button
                 onClick={() => togglePlans(i)}
-                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} ${error ? "bg-strawberryRed bg-opacity-5 outline-strawberryRed" : "hover:outline-purplishBlue"} flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-all duration-300 ease-in-out ~sm/md:~gap-3/8 md:flex-col md:items-start`}
+                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} "hover:outline-purplishBlue" flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-all duration-300 ease-in-out hover:outline-purplishBlue ~sm/md:~gap-3/8 md:flex-col md:items-start`}
               >
                 <img src={i.img} />
                 <div className="flex flex-col">

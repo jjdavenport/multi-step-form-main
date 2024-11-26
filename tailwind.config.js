@@ -28,8 +28,8 @@ export default {
         custom: ["ubuntu", "sans-serif"],
       },
       backgroundImage: {
-        mobile: "url('../src/components/assets/bg-sidebar-mobile.svg')",
-        desktop: "url('../src/components/assets/bg-sidebar-desktop.svg')",
+        mobile: "url('../src/assets/bg-sidebar-mobile.svg')",
+        desktop: "url('../src/assets/bg-sidebar-desktop.svg')",
       },
     },
   },

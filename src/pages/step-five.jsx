@@ -1,4 +1,4 @@
-import checkIcon from "./assets/icon-thank-you.svg";
+import checkIcon from "../assets/icon-thank-you.svg";
 
 const StepFive = ({ data }) => {
   return (

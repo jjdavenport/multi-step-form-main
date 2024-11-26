@@ -1,5 +1,5 @@
 import { useState } from "react";
-import data from "./components/assets/data.json";
+import data from "./assets/data.json";
 import Form from "./components/form.jsx";
 import Progress from "./components/progress.jsx";
 import Buttons from "./components/buttons.jsx";
@@ -8,32 +8,26 @@ import Footer from "./components/footer.jsx";
 
 function App() {
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
   const [plan, setPlan] = useState({
-    plan: null,
-    price: null,
-    addOns: null,
+    plan: data.steps[1].plans[0].name,
+    price: data.steps[1].plans[0].priceM,
   });
   const [yearly, setYearly] = useState(false);
-  const [valid, setValid] = useState({
-    form: false,
-    plan: false,
-  });
   const desktop = useMediaQuery({ minWidth: 768 });
-
-  const checkValid = () => {
-    setError(true);
-  };
 
   const changePlan = () => {
     setPage(2);
   };
 
   const nextPage = () => {
-    (page === 1 && valid.plan && setPage((prev) => prev + 1)) ||
-      (page === 2 && valid.plan && setPage((prev) => prev + 1)) ||
+    (page === 1 && error === null && setError(true)) ||
+      (page === 1 && error === true) ||
+      (page === 1 && error === false && setPage((prev) => prev + 1)) ||
+      (page === 2 && setPage((prev) => prev + 1)) ||
       (page === 3 && setPage((prev) => prev + 1)) ||
       (page === 4 && setPage((prev) => prev + 1));
+    console.log("next", error);
   };
 
   const prevPage = () => {
@@ -50,17 +44,12 @@ function App() {
           : data.steps[3];
   };
 
-  const validProp = () => {
-    return page === 1 ? valid.form : page === 2 ? valid.plan : valid;
-  };
-
   return (
     <>
       <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base">
         <div className="flex flex-1 flex-col justify-between md:w-full md:items-center md:justify-center">
           <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
             <Progress
-              valid={validProp()}
               desktop={desktop}
               page={page}
               steps={data.steps}
@@ -70,8 +59,6 @@ function App() {
               <Form
                 setError={setError}
                 error={error}
-                valid={valid}
-                setValid={setValid}
                 plan={plan}
                 setPlan={setPlan}
                 yearly={yearly}
@@ -82,9 +69,8 @@ function App() {
               />
               {desktop && page < 5 && (
                 <Buttons
-                  valid={validProp()}
-                  error={page === 2 && error}
-                  checkValid={page === 2 && checkValid}
+                  type={"submit"}
+                  error={error}
                   prevPage={prevPage}
                   nextPage={nextPage}
                   data={dataProp()}
@@ -94,11 +80,10 @@ function App() {
           </main>
           {!desktop && page < 5 && (
             <Buttons
-              error={page === 2 && error}
-              valid={validProp()}
+              type={"submit"}
+              error={error}
               prevPage={prevPage}
               nextPage={nextPage}
-              checkValid={page === 2 && checkValid}
               data={dataProp()}
             />
           )}

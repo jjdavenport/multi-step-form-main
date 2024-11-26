@@ -1,10 +1,18 @@
-import Input from "./input";
-import { useState } from "react";
+import Input from "../components/input";
+import { useState, useEffect } from "react";
 
-const StepOne = ({ data, inputs }) => {
-  const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
-  const [phoneInput, setPhoneInput] = useState("");
+const StepOne = ({
+  data,
+  inputs,
+  setFormError,
+  error,
+  nameInput,
+  emailInput,
+  phoneInput,
+  setEmailInput,
+  setPhoneInput,
+  setNameInput,
+}) => {
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [phoneError, setPhoneError] = useState("");
@@ -30,10 +38,16 @@ const StepOne = ({ data, inputs }) => {
     validate(input, setError, type);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    validate();
+  const handleSubmit = () => {
+    validate(nameInput, setNameError, "name");
+    validate(emailInput, setEmailError, "email");
+    validate(phoneInput, setPhoneError, "phone");
   };
+
+  useEffect(() => {
+    error && handleSubmit();
+  }, [error]);
+
   return (
     <>
       <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">

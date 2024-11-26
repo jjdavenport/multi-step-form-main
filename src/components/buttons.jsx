@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Buttons = ({ data, prevPage, nextPage, valid, checkValid, error }) => {
+const Buttons = ({ data, prevPage, nextPage, error, type }) => {
   const [showButtons, setShowButtons] = useState(false);
 
   useEffect(() => {
@@ -18,8 +18,9 @@ const Buttons = ({ data, prevPage, nextPage, valid, checkValid, error }) => {
       >
         {data.buttons.length === 1 ? (
           <button
+            type={type}
             onClick={nextPage}
-            className="rounded-md bg-marineBlue px-5 py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-opacity-60"
+            className={`${error && "cursor-not-allowed"} rounded-md bg-marineBlue px-5 py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-opacity-60`}
           >
             {data.buttons[0]}
           </button>
@@ -33,7 +34,7 @@ const Buttons = ({ data, prevPage, nextPage, valid, checkValid, error }) => {
                 {data.buttons[0]}
               </button>
               <button
-                onClick={valid ? nextPage : checkValid}
+                onClick={nextPage}
                 className={`${error && "cursor-not-allowed"} ${data.buttons[1] === "Confirm" ? "bg-purplishBlue" : "bg-marineBlue"} rounded-md px-5 py-3 font-medium text-alabaster transition-all duration-300 ease-in-out hover:bg-opacity-60`}
               >
                 {data.buttons[1]}

@@ -5,7 +5,6 @@ const StepThree = ({ data, addOns, yearly, active, setActive }) => {
       priceM: addOns[index].priceM,
       priceY: addOns[index].priceY,
     };
-
     setActive((prev) =>
       prev.some((activeItem) => activeItem.name === item.name)
         ? prev.filter((activeItem) => activeItem.name !== item.name)
