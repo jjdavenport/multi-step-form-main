@@ -1,16 +1,7 @@
+import useAddOns from "../hooks/useToggleAddOns";
+
 const StepThree = ({ data, addOns, yearly, active, setActive }) => {
-  const toggle = (index) => {
-    const item = {
-      name: addOns[index].name,
-      priceM: addOns[index].priceM,
-      priceY: addOns[index].priceY,
-    };
-    setActive((prev) =>
-      prev.some((activeItem) => activeItem.name === item.name)
-        ? prev.filter((activeItem) => activeItem.name !== item.name)
-        : [...prev, item],
-    );
-  };
+  const { toggle } = useAddOns({ setActive, addOns });
   return (
     <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">
       <div className="flex flex-col gap-2">

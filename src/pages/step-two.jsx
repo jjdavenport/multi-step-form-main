@@ -1,3 +1,5 @@
+import useToggle from "../hooks/useToggle";
+
 const StepTwo = ({
   data,
   plans,
@@ -7,21 +9,13 @@ const StepTwo = ({
   setActive,
   setYearly,
 }) => {
-  const togglePlans = (i) => {
-    setActive(i);
-    setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
-  };
-  const toggleYearly = () => {
-    setYearly((prev) => {
-      const changeYearly = !prev;
-      active &&
-        setPlan({
-          plan: active.name,
-          price: changeYearly ? active.priceY : active.priceM,
-        });
-      return changeYearly;
-    });
-  };
+  const { togglePlans, toggleYearly } = useToggle({
+    active,
+    yearly,
+    setPlan,
+    setActive,
+    setYearly,
+  });
   return (
     <>
       <div className="flex flex-col ~sm/md:~gap-6/8 md:py-4">

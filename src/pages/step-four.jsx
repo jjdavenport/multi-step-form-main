@@ -1,19 +1,7 @@
+import useTotal from "../hooks/useTotal";
+
 const StepFour = ({ data, onClick, yearly, plan, addOns }) => {
-  const total = () => {
-    const planPrice = parseInt(plan.price.replace(/[^0-9]/g, ""));
-    const addOnsPrice = addOns.reduce(
-      (acc, item) =>
-        acc +
-        parseInt(
-          yearly
-            ? item.priceY.replace(/[^0-9]/g, "")
-            : item.priceM.replace(/[^0-9]/g, ""),
-          10,
-        ),
-      0,
-    );
-    return planPrice + addOnsPrice;
-  };
+  const { total } = useTotal({ plan, addOns, yearly });
   return (
     <>
       <div className="flex flex-col gap-6">

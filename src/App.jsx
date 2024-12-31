@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import data from "./assets/data.json";
 import Form from "./components/form.jsx";
 import Progress from "./components/progress.jsx";
@@ -7,13 +7,14 @@ import { useMediaQuery } from "react-responsive";
 import Footer from "./components/footer.jsx";
 
 function App() {
+  const formRef = useRef(null);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(false);
   const [plan, setPlan] = useState({
     plan: data.steps[1].plans[0].name,
     price: data.steps[1].plans[0].priceM,
   });
   const [yearly, setYearly] = useState(false);
+  const [valid, setValid] = useState(false);
   const desktop = useMediaQuery({ minWidth: 768 });
 
   const changePlan = () => {
@@ -21,13 +22,15 @@ function App() {
   };
 
   const nextPage = () => {
-    (page === 1 && error === null && setError(true)) ||
-      (page === 1 && error === true) ||
-      (page === 1 && error === false && setPage((prev) => prev + 1)) ||
-      (page === 2 && setPage((prev) => prev + 1)) ||
-      (page === 3 && setPage((prev) => prev + 1)) ||
-      (page === 4 && setPage((prev) => prev + 1));
-    console.log("next", error);
+    if (formRef.current) {
+      formRef.current.requestSubmit();
+    }
+    setValid((prev) => {
+      if (prev) {
+        setPage((prevPage) => prevPage + 1);
+      }
+      return prev;
+    });
   };
 
   const prevPage = () => {
@@ -57,8 +60,8 @@ function App() {
             />
             <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
               <Form
-                setError={setError}
-                error={error}
+                setValid={setValid}
+                formRef={formRef}
                 plan={plan}
                 setPlan={setPlan}
                 yearly={yearly}
@@ -70,7 +73,6 @@ function App() {
               {desktop && page < 5 && (
                 <Buttons
                   type={"submit"}
-                  error={error}
                   prevPage={prevPage}
                   nextPage={nextPage}
                   data={dataProp()}
@@ -81,7 +83,6 @@ function App() {
           {!desktop && page < 5 && (
             <Buttons
               type={"submit"}
-              error={error}
               prevPage={prevPage}
               nextPage={nextPage}
               data={dataProp()}

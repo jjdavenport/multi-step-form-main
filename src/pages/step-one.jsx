@@ -1,56 +1,16 @@
 import Input from "../components/input";
-import { useState, useEffect } from "react";
+import useValidator from "../hooks/useValidator";
 
-const StepOne = ({
-  data,
-  inputs,
-  setFormError,
-  error,
-  nameInput,
-  emailInput,
-  phoneInput,
-  setEmailInput,
-  setPhoneInput,
-  setNameInput,
-}) => {
-  const [nameError, setNameError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [phoneError, setPhoneError] = useState("");
-
-  const validate = (input, setError, type) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const phoneRegex = /^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$/;
-
-    input === ""
-      ? setError("This field is required")
-      : type === "email"
-        ? !input.match(emailRegex)
-          ? setError("Must be a valid email address")
-          : setError("")
-        : type === "phone"
-          ? !input.match(phoneRegex)
-            ? setError("Must be a valid phone number")
-            : setError("")
-          : setError("");
-  };
-
-  const handleBlur = (input, setError, type) => {
-    validate(input, setError, type);
-  };
-
-  const handleSubmit = () => {
-    validate(nameInput, setNameError, "name");
-    validate(emailInput, setEmailError, "email");
-    validate(phoneInput, setPhoneError, "phone");
-  };
-
-  useEffect(() => {
-    error && handleSubmit();
-  }, [error]);
-
+const StepOne = ({ data, formRef, inputs, setInput, setValid, input }) => {
+  const { handleSubmit, validate, error } = useValidator({ setValid, input });
   return (
     <>
-      <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">
+      <form
+        ref={formRef}
+        onSubmit={handleSubmit}
+        noValidate
+        className="flex flex-col ~sm/md:~gap-4/8 md:py-4"
+      >
         <div className="flex flex-col gap-2">
           <span className="font-bold text-marineBlue ~sm/md:~text-2xl/4xl">
             {data.title}
@@ -63,33 +23,39 @@ const StepOne = ({
             label={inputs[0].label}
             type={inputs[0].type}
             placeholder={inputs[0].placeholder}
-            onChange={(e) => setNameInput(e.target.value)}
-            onBlur={() => handleBlur(nameInput, setNameError, "name")}
-            value={nameInput}
-            onError={nameError}
+            onChange={(e) =>
+              setInput((prev) => ({ ...prev, name: e.target.value }))
+            }
+            onBlur={(e) => validate("name", e.target.value)}
+            value={input.name}
+            error={error.name}
           />
           <Input
             htmlFor={inputs[1].type}
             label={inputs[1].label}
             type={inputs[1].type}
             placeholder={inputs[1].placeholder}
-            onChange={(e) => setEmailInput(e.target.value)}
-            onBlur={() => handleBlur(emailInput, setEmailError, "email")}
-            value={emailInput}
-            onError={emailError}
+            onChange={(e) =>
+              setInput((prev) => ({ ...prev, email: e.target.value }))
+            }
+            onBlur={(e) => validate("email", e.target.value)}
+            value={input.email}
+            error={error.email}
           />
           <Input
             htmlFor={inputs[2].type}
             label={inputs[2].label}
             type={inputs[2].type}
             placeholder={inputs[2].placeholder}
-            onChange={(e) => setPhoneInput(e.target.value)}
-            onBlur={() => handleBlur(phoneInput, setPhoneError, "phone")}
-            value={phoneInput}
-            onError={phoneError}
+            onChange={(e) =>
+              setInput((prev) => ({ ...prev, phone: e.target.value }))
+            }
+            onBlur={(e) => validate("phone", e.target.value)}
+            value={input.phone}
+            error={error.phone}
           />
         </ul>
-      </div>
+      </form>
     </>
   );
 };

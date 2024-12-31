@@ -4,7 +4,7 @@ const Input = ({
   label,
   onChange,
   onBlur,
-  onError,
+  error,
   value,
   htmlFor,
 }) => {
@@ -17,12 +17,12 @@ const Input = ({
         >
           <div className="flex justify-between">
             <span>{label}</span>
-            {onError && (
-              <span className="font-bold text-strawberryRed">{onError}</span>
+            {error && (
+              <span className="font-bold text-strawberryRed">{error}</span>
             )}
           </div>
           <input
-            className={`${onError ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out placeholder:font-medium placeholder:text-coolGray ~sm/md:~p-2/3`}
+            className={`${error ? "outline-strawberryRed" : "outline-lightGray focus:outline-purplishBlue"} cursor-pointer rounded-md text-base outline outline-1 transition-colors duration-300 ease-in-out [appearance:textfield] placeholder:font-medium placeholder:text-coolGray ~sm/md:~p-2/3 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
             value={value}
             type={type}
             placeholder={placeholder}

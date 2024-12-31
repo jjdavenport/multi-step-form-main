@@ -1,16 +1,7 @@
-import { useEffect, useState } from "react";
+import useButtons from "../hooks/useButtons";
 
-const Buttons = ({ data, prevPage, nextPage, error, type }) => {
-  const [showButtons, setShowButtons] = useState(false);
-
-  useEffect(() => {
-    if (data.buttons.length === 2) {
-      setTimeout(() => setShowButtons(true), 1);
-    } else {
-      setShowButtons(false);
-    }
-  }, [data.buttons.length]);
-
+const Buttons = ({ data, prevPage, nextPage, type }) => {
+  const { showButtons } = useButtons({ data });
   return (
     <>
       <nav
@@ -20,7 +11,7 @@ const Buttons = ({ data, prevPage, nextPage, error, type }) => {
           <button
             type={type}
             onClick={nextPage}
-            className={`${error && "cursor-not-allowed"} rounded-md bg-marineBlue px-5 py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-opacity-60`}
+            className="rounded-md bg-marineBlue px-5 py-3 font-medium text-white transition-all duration-300 ease-in-out hover:bg-opacity-60"
           >
             {data.buttons[0]}
           </button>
@@ -35,7 +26,7 @@ const Buttons = ({ data, prevPage, nextPage, error, type }) => {
               </button>
               <button
                 onClick={nextPage}
-                className={`${error && "cursor-not-allowed"} ${data.buttons[1] === "Confirm" ? "bg-purplishBlue" : "bg-marineBlue"} rounded-md px-5 py-3 font-medium text-alabaster transition-all duration-300 ease-in-out hover:bg-opacity-60`}
+                className={`${data.buttons[1] === "Confirm" ? "bg-purplishBlue" : "bg-marineBlue"} rounded-md px-5 py-3 font-medium text-alabaster transition-all duration-300 ease-in-out hover:bg-opacity-60`}
               >
                 {data.buttons[1]}
               </button>

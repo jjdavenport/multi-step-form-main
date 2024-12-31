@@ -3,7 +3,7 @@ import StepTwo from "../pages/step-two";
 import StepThree from "../pages/step-three";
 import StepFour from "../pages/step-four";
 import StepFive from "../pages/step-five";
-import { useState } from "react";
+import useForm from "../hooks/useForm";
 
 const Form = ({
   data,
@@ -15,27 +15,26 @@ const Form = ({
   error,
   setError,
   setYearly,
+  formRef,
+  setValid,
 }) => {
-  const [activePlan, setActivePlan] = useState(data.steps[1].plans[0]);
-  const [activeAddOns, setActiveAddOns] = useState([]);
-  const [nameInput, setNameInput] = useState("");
-  const [emailInput, setEmailInput] = useState("");
-  const [phoneInput, setPhoneInput] = useState("");
+  const {
+    input,
+    setInput,
+    activePlan,
+    setActivePlan,
+    activeAddOns,
+    setActiveAddOns,
+  } = useForm({ data });
   return (
     <>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        noValidate
-        className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:flex-1 md:px-0 md:py-0"
-      >
+      <div className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:flex-1 md:px-0 md:py-0">
         {page === 1 ? (
           <StepOne
-            nameInput={nameInput}
-            emailInput={emailInput}
-            phoneInput={phoneInput}
-            setNameInput={setNameInput}
-            setEmailInput={setEmailInput}
-            setPhoneInput={setPhoneInput}
+            setValid={setValid}
+            formRef={formRef}
+            input={input}
+            setInput={setInput}
             setFormError={setError}
             data={data.steps[0]}
             inputs={data.steps[0].inputs}
@@ -74,7 +73,7 @@ const Form = ({
         ) : (
           <StepFive data={data.steps[4]} />
         )}
-      </form>
+      </div>
     </>
   );
 };
