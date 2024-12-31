@@ -9,10 +9,10 @@ const StepOne = ({ data, formRef, inputs, setInput, setValid, input }) => {
         ref={formRef}
         onSubmit={handleSubmit}
         noValidate
-        className="flex flex-col ~sm/md:~gap-4/8 md:py-4"
+        className="flex flex-col ~sm/md:~gap-4/8"
       >
         <div className="flex flex-col gap-2">
-          <span className="font-bold text-marineBlue ~sm/md:~text-2xl/4xl">
+          <span className="font-bold text-marineBlue ~sm/md:~text-2xl/4xl ~sm/md:~pt-0/4">
             {data.title}
           </span>
           <p className="text-coolGray">{data.description}</p>

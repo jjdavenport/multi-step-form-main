@@ -28,7 +28,7 @@ const Form = ({
   } = useForm({ data });
   return (
     <>
-      <div className="flex h-fit flex-col rounded-lg bg-white px-6 py-8 md:max-w-md md:flex-1 md:px-0 md:py-0">
+      <div className="flex flex-col rounded-lg bg-white px-6 py-8 md:w-[25rem] md:flex-1 md:px-0 md:py-0">
         {page === 1 ? (
           <StepOne
             setValid={setValid}

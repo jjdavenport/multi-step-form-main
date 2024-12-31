@@ -29,7 +29,10 @@ const useApp = ({ data }) => {
   };
 
   const prevPage = () => {
-    setPage((prev) => prev - 1);
+    setValid(false);
+    setPage((prev) => {
+      return prev - 1;
+    });
   };
 
   const dataProp = () => {

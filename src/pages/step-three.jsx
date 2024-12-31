@@ -3,9 +3,9 @@ import useAddOns from "../hooks/useToggleAddOns";
 const StepThree = ({ data, addOns, yearly, active, setActive }) => {
   const { toggle } = useAddOns({ setActive, addOns });
   return (
-    <div className="flex flex-col ~sm/md:~gap-4/8 md:py-4">
+    <div className="flex flex-col ~sm/md:~gap-4/8">
       <div className="flex flex-col gap-2">
-        <span className="font-bold text-marineBlue ~sm/md:~text-2xl/3xl">
+        <span className="font-bold text-marineBlue ~sm/md:~text-2xl/3xl ~sm/md:~pt-0/4">
           {data.title}
         </span>
         <p className="font-medium text-coolGray">{data.description}</p>

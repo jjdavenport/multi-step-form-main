@@ -4,9 +4,9 @@ const StepFour = ({ data, onClick, yearly, plan, addOns }) => {
   const { total } = useTotal({ plan, addOns, yearly });
   return (
     <>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col ~sm/md:~gap-4/8">
         <div className="flex flex-col gap-2">
-          <span className="text-2xl font-bold text-marineBlue">
+          <span className="text-2xl font-bold text-marineBlue ~sm/md:~pt-0/4">
             {data.title}
           </span>
           <p className="font-medium text-coolGray">{data.description}</p>
