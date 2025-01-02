@@ -1,4 +1,4 @@
-import useToggle from "../hooks/useToggle";
+import usePlans from "../hooks/usePlans";
 
 const StepTwo = ({
   data,
@@ -9,7 +9,7 @@ const StepTwo = ({
   setActive,
   setYearly,
 }) => {
-  const { togglePlans, toggleYearly } = useToggle({
+  const { togglePlans, toggleYearly } = usePlans({
     active,
     yearly,
     setPlan,
@@ -30,7 +30,7 @@ const StepTwo = ({
             <li key={index}>
               <button
                 onClick={() => togglePlans(i)}
-                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} "hover:outline-purplishBlue" flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-all duration-300 ease-in-out hover:outline-purplishBlue ~sm/md:~gap-3/8 md:flex-col md:items-start`}
+                className={`${active === i ? "bg-purplishBlue bg-opacity-5 outline-purplishBlue" : "outline-lightGray"} "hover:outline-purplishBlue" flex w-full items-center rounded-lg p-3 text-left outline outline-1 transition-all duration-300 ease-in-out hover:outline-purplishBlue ~sm/md:~gap-3/12 md:flex-col md:items-start`}
               >
                 <img src={i.img} />
                 <div className="flex flex-col">

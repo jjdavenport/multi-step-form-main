@@ -26,7 +26,7 @@ const Buttons = ({ data, prevPage, nextPage, type }) => {
               </button>
               <button
                 onClick={nextPage}
-                className={`${data.buttons[1] === "Confirm" ? "bg-purplishBlue" : "bg-marineBlue"} rounded-md px-5 py-3 font-medium text-alabaster transition-all duration-300 ease-in-out hover:bg-opacity-60`}
+                className={`${data.buttons[1] === "Confirm" ? "bg-purplishBlue" : "bg-marineBlue"} w-32 rounded-md px-5 py-3 font-medium text-alabaster transition-all duration-300 ease-in-out hover:bg-opacity-60`}
               >
                 {data.buttons[1]}
               </button>

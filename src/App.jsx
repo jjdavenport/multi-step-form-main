@@ -25,14 +25,14 @@ function App() {
     <>
       <div className="flex h-full min-h-screen flex-col justify-between bg-magnolia font-custom text-base">
         <div className="flex flex-1 flex-col justify-between md:w-full md:items-center md:justify-center">
-          <main className="flex flex-col md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
+          <main className="flex flex-col items-center md:h-[600px] md:w-full md:max-w-[900px] md:flex-row md:items-stretch md:rounded-xl md:bg-white md:p-4 md:shadow-xl">
             <Progress
               desktop={desktop}
               page={page}
               steps={data.steps}
               sidebar={data.sidebar}
             />
-            <section className="-mt-20 justify-between p-4 md:mt-0 md:flex md:w-full md:flex-col md:items-center">
+            <section className="-mt-20 w-11/12 justify-between overflow-hidden rounded-md shadow-md md:mt-0 md:flex md:w-full md:flex-col md:items-center md:p-4 md:shadow-none">
               <Form
                 setValid={setValid}
                 formRef={formRef}

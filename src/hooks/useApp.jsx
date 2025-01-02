@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const useApp = ({ data }) => {
@@ -17,20 +17,24 @@ const useApp = ({ data }) => {
   };
 
   const nextPage = () => {
-    if (formRef.current) {
+    if (page === 1 && formRef.current) {
       formRef.current.requestSubmit();
+      setValid((prev) => {
+        if (prev) {
+          setPage((prevPage) => prevPage + 1);
+        }
+        return prev;
+      });
+    } else {
+      setPage((prevPage) => prevPage + 1);
     }
-    setValid((prev) => {
-      if (prev) {
-        setPage((prevPage) => prevPage + 1);
-      }
-      return prev;
-    });
   };
 
   const prevPage = () => {
-    setValid(false);
     setPage((prev) => {
+      if (prev === 2) {
+        setValid(false);
+      }
       return prev - 1;
     });
   };

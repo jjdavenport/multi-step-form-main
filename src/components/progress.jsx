@@ -1,7 +1,7 @@
 const Progress = ({ steps, page, desktop, sidebar }) => {
   return (
     <aside
-      className={`${!desktop && "h-40"} flex cursor-default flex-col items-center bg-mobile bg-cover bg-no-repeat pt-8 ~sm/md:~p-6/8 md:w-5/12 md:items-start md:rounded-lg md:bg-desktop md:bg-bottom`}
+      className={`${!desktop && "h-40"} flex w-full cursor-default flex-col items-center bg-mobile bg-cover bg-no-repeat pt-8 ~sm/md:~p-6/8 md:h-full md:w-5/12 md:items-start md:rounded-lg md:bg-desktop md:bg-bottom`}
     >
       <ul className="flex ~sm/md:~gap-4/6 md:h-full md:flex-col">
         {steps.slice(0, 4).map((i, index) => (

@@ -1,4 +1,4 @@
-const useToggle = ({ setActive, setPlan, yearly, active, setYearly }) => {
+const usePlans = ({ setActive, setPlan, yearly, active, setYearly }) => {
   const togglePlans = (i) => {
     setActive(i);
     setPlan({ plan: i.name, price: yearly ? i.priceY : i.priceM });
@@ -22,4 +22,4 @@ const useToggle = ({ setActive, setPlan, yearly, active, setYearly }) => {
   };
 };
 
-export default useToggle;
+export default usePlans;
