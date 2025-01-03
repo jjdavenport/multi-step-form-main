@@ -13,7 +13,8 @@ function App() {
     setPlan,
     yearly,
     setYearly,
-    setValid,
+    valid,
+    updateValid,
     desktop,
     changePlan,
     nextPage,
@@ -34,7 +35,8 @@ function App() {
             />
             <section className="-mt-20 w-11/12 justify-between overflow-hidden rounded-md shadow-md md:mt-0 md:flex md:w-full md:flex-col md:items-center md:p-4 md:shadow-none">
               <Form
-                setValid={setValid}
+                valid={valid}
+                updateValid={updateValid}
                 formRef={formRef}
                 plan={plan}
                 setPlan={setPlan}

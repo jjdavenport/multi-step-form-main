@@ -1,60 +1,52 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 
-const useValidator = ({ input, setValid }) => {
+const useValidator = ({ input, valid }) => {
   const [error, setError] = useState({
     name: "",
     email: "",
     phone: "",
   });
 
-  const validate = (type, value) => {
+  const validate = useCallback((type, value) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\+?(\d[\d-. ]+)?(\([\d-. ]+\))?[\d-. ]+\d$/;
 
-    value === ""
-      ? setError((prev) => ({
-          ...prev,
-          [type]: "This field is required",
-        }))
-      : type === "email"
-        ? !value.match(emailRegex)
-          ? setError((prev) => ({
-              ...prev,
-              [type]: "Must be a valid email address",
-            }))
-          : setError((prev) => ({
-              ...prev,
-              [type]: null,
-            }))
-        : type === "phone"
-          ? !value.match(phoneRegex)
-            ? setError((prev) => ({
-                ...prev,
-                [type]: "Must be a valid phone number",
-              }))
-            : setError((prev) => ({
-                ...prev,
-                [type]: null,
-              }))
-          : setError((prev) => ({
-              ...prev,
-              [type]: null,
-            }));
-  };
+    let newError = null;
+
+    if (value === "") {
+      newError = "This field is required";
+    } else if (type === "email" && !value.match(emailRegex)) {
+      newError = "Must be a valid email address";
+    } else if (type === "phone" && !value.match(phoneRegex)) {
+      newError = "Must be a valid phone number";
+    }
+
+    setError((prev) => ({
+      ...prev,
+      [type]: newError,
+    }));
+
+    return newError === null;
+  }, []);
+
+  const isFormValid = useCallback(() => {
+    const nameValid = validate("name", input.name);
+    const emailValid = validate("email", input.email);
+    const phoneValid = validate("phone", input.phone);
+    return nameValid && emailValid && phoneValid;
+  }, [input, validate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    error.name === null && error.email === null && error.phone === null
-      ? setValid(true)
-      : validate("name", input.name);
-    validate("email", input.email);
-    validate("phone", input.phone);
+    const formIsValid = isFormValid();
+    valid.current = formIsValid;
   };
 
   return {
     handleSubmit,
     validate,
     error,
+    isFormValid,
   };
 };
 

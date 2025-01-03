@@ -16,7 +16,8 @@ const Form = ({
   setError,
   setYearly,
   formRef,
-  setValid,
+  valid,
+  updateValid,
 }) => {
   const {
     input,
@@ -31,7 +32,8 @@ const Form = ({
       <div className="flex flex-col rounded-lg bg-white px-6 py-8 md:w-[28rem] md:flex-1 md:px-0 md:py-0">
         {page === 1 ? (
           <StepOne
-            setValid={setValid}
+            valid={valid}
+            updateValid={updateValid}
             formRef={formRef}
             input={input}
             setInput={setInput}

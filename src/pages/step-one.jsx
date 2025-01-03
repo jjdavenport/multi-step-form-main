@@ -1,8 +1,12 @@
 import Input from "../components/input";
 import useValidator from "../hooks/useValidator";
 
-const StepOne = ({ data, formRef, inputs, setInput, setValid, input }) => {
-  const { handleSubmit, validate, error } = useValidator({ setValid, input });
+const StepOne = ({ data, formRef, inputs, setInput, valid, input }) => {
+  const { handleSubmit, validate, error } = useValidator({
+    valid,
+    input,
+  });
+
   return (
     <>
       <form

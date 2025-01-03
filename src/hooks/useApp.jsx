@@ -1,15 +1,15 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 const useApp = ({ data }) => {
   const formRef = useRef(null);
+  const validRef = useRef(false);
   const [page, setPage] = useState(1);
   const [plan, setPlan] = useState({
     plan: data.steps[1].plans[0].name,
     price: data.steps[1].plans[0].priceM,
   });
   const [yearly, setYearly] = useState(false);
-  const [valid, setValid] = useState(false);
   const desktop = useMediaQuery({ minWidth: 768 });
 
   const changePlan = () => {
@@ -19,24 +19,16 @@ const useApp = ({ data }) => {
   const nextPage = () => {
     if (page === 1 && formRef.current) {
       formRef.current.requestSubmit();
-      setValid((prev) => {
-        if (prev) {
-          setPage((prevPage) => prevPage + 1);
-        }
-        return prev;
-      });
+      if (validRef.current) {
+        setPage((prevPage) => prevPage + 1);
+      }
     } else {
       setPage((prevPage) => prevPage + 1);
     }
   };
 
   const prevPage = () => {
-    setPage((prev) => {
-      if (prev === 2) {
-        setValid(false);
-      }
-      return prev - 1;
-    });
+    setPage((prev) => prev - 1);
   };
 
   const dataProp = () => {
@@ -49,6 +41,10 @@ const useApp = ({ data }) => {
           : data.steps[3];
   };
 
+  const updateValid = (isValid) => {
+    validRef.current = isValid;
+  };
+
   return {
     formRef,
     page,
@@ -56,8 +52,8 @@ const useApp = ({ data }) => {
     setPlan,
     yearly,
     setYearly,
-    valid,
-    setValid,
+    valid: validRef,
+    updateValid,
     desktop,
     changePlan,
     nextPage,
